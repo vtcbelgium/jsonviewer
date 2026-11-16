@@ -67,6 +67,22 @@
           "@type": "Answer",
           "text": "Yes! Once loaded, JSON Viewer executes without any network dependency. You can safely disconnect your internet connection and keep using it."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe for teachers to inspect student data and classroom grades?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, absolutely. Because the entire JSON parser and tree renderer runs strictly inside your local browser memory, no student names, grades, or school records leave your machine. It complies fully with GDPR and student data privacy principles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does JSON Viewer differ from JSONFix?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSONFix repairs malformed or broken JSON syntax (such as trailing commas, single quotes, or missing quotes around keys). JSON Viewer takes valid JSON and lets you visually explore its structure, search keys and values, collapse nodes, copy JSONPaths, and convert nested arrays to tables."
+        }
       }
     ]
   }
@@ -101,6 +117,7 @@
     </div>
 
     <div class="header-actions">
+      <a href="https://jsonfix.othrys.be/" target="_blank" rel="noopener noreferrer" class="nav-fleet-pill" title="Need to repair malformed JSON?">JSONFix ↗</a>
       <a href="https://othrys.be/" target="_blank" rel="noopener noreferrer" class="nav-fleet-pill" title="Return to Sovereign Fleet Hub">Fleet ↗</a>
       <button type="button" id="open-settings" class="icon-toggle-btn header-btn" aria-label="Open settings and accessibility preferences" title="Settings">⚙</button>
       <button type="button" id="open-about" class="icon-toggle-btn header-btn" aria-label="Open about dialog" title="About JSON Viewer">ℹ</button>
@@ -118,6 +135,12 @@
       <p class="hero-subtitle">Explore, fold, search, and inspect nested JSON trees, JSONPaths, and payload stats privately in your browser.</p>
     </section>
 
+    <!-- SIBLING LINK BANNER -->
+    <div class="sibling-banner" role="complementary" aria-label="Related Tool Link">
+      <span>🛠️ Need to repair syntax errors, fix unquoted keys, or remove trailing commas?</span>
+      <a href="https://jsonfix.othrys.be/" target="_blank" rel="noopener noreferrer">Open JSONFix ↗</a>
+    </div>
+
     <!-- CORE WORKSPACE CARD -->
     <section class="tool-workspace card" aria-label="Utility Workspace">
       <div class="workspace-header">
@@ -127,14 +150,133 @@
         </div>
       </div>
       <div class="workspace-body">
-        <textarea id="app-input" class="app-textarea" placeholder="{&quot;b&quot;: 1, &quot;a&quot;: 2}" rows="8" aria-label="Primary input"></textarea>
+        <!-- QUICK PRESETS FOR TEACHERS & DEVELOPERS -->
+        <div class="sample-presets-bar" aria-label="Sample Payloads">
+          <span class="preset-label">Quick Samples:</span>
+          <button type="button" class="preset-chip" data-preset="classroom" title="Load sample student roster with scores and courses">🎓 Classroom Roster</button>
+          <button type="button" class="preset-chip" data-preset="api" title="Load sample REST API response">🌐 REST API</button>
+          <button type="button" class="preset-chip" data-preset="config" title="Load sample nested application settings">⚙️ App Config</button>
+        </div>
+
+        <textarea id="app-input" class="app-textarea" placeholder="{&quot;course&quot;: &quot;Computer Science&quot;, &quot;students&quot;: [{&quot;name&quot;: &quot;Alice&quot;, &quot;score&quot;: 92}]}" rows="8" aria-label="Primary input"></textarea>
+        
         <div class="workspace-actions">
-          <button id="action-process" class="btn btn-primary" type="button">Run JSON Viewer</button>
+          <button id="action-process" class="btn btn-primary" type="button">Inspect JSON Tree</button>
           <button id="action-clear" class="btn btn-secondary" type="button">Clear</button>
           <button id="action-copy" class="btn btn-secondary" type="button">Copy Output</button>
         </div>
+
+        <!-- LIVE METRICS BAR -->
+        <div class="metrics-bar" id="metrics-panel" aria-label="Payload Statistics">
+          <div class="metric-card">
+            <div class="metric-title">Payload Size</div>
+            <div class="metric-value" id="metric-size">-</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Total Keys</div>
+            <div class="metric-value" id="metric-keys">-</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Max Depth</div>
+            <div class="metric-value" id="metric-depth">-</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Root Type</div>
+            <div class="metric-value" id="metric-type">-</div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC OUTPUT REGION -->
         <div id="output-region" class="output-region card" aria-live="polite">
-          <div class="output-placeholder">Output results will appear here in real-time.</div>
+          <div class="output-placeholder">Enter JSON above or click a classroom preset to begin exploration.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATIONAL GUIDE & ALL INFO SECTION -->
+    <section class="edu-section" aria-label="Educational Guide and Comprehensive JSON Reference">
+      <h2 class="section-title">Complete JSON Reference &amp; Educational Guide</h2>
+      <p style="color: var(--text-secondary); max-width: 720px; line-height: 1.6; margin-bottom: 1.5rem;">
+        Everything you need to know about understanding, teaching, and inspecting JSON data structures privately in the classroom or production.
+      </p>
+
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h4>🎓 Classroom &amp; Teaching Guide</h4>
+          <p>Teaching data structures or web APIs? JSON (JavaScript Object Notation) is the global standard for exchanging data across the internet.</p>
+          <ul>
+            <li><strong>Hierarchical Trees:</strong> Use the collapsible nodes (<code>▶</code> / <code>▼</code>) to show students how nested objects contain sub-properties.</li>
+            <li><strong>Arrays vs Objects:</strong> Arrays <code>[...]</code> are ordered lists of items, while Objects <code>{...}</code> are key-value dictionaries.</li>
+            <li><strong>Table View:</strong> If your JSON represents tabular data (e.g. students, grades, products), click the <strong>📊 Table</strong> tab to visualize columns and rows automatically.</li>
+          </ul>
+        </div>
+
+        <div class="edu-card">
+          <h4>🔍 JSONPath &amp; Fast Navigation</h4>
+          <p>Need to query a specific property in code (Python, JavaScript, or jq)?</p>
+          <ul>
+            <li><strong>Click to Copy JSONPath:</strong> Hover over any node in the tree and click the <code>path</code> badge to copy its exact JSONPath (e.g. <code>$.students[0].name</code>).</li>
+            <li><strong>Instant Live Search:</strong> Type in the search box to filter keys and values across the entire tree in real-time. Matches are highlighted automatically.</li>
+            <li><strong>Quick Shortcuts:</strong> Press <code>Ctrl + Enter</code> (or <code>Cmd + Enter</code>) in the text area to immediately inspect your payload.</li>
+          </ul>
+        </div>
+
+        <div class="edu-card">
+          <h4>🛡️ Strict Classroom Privacy (Zero Cloud)</h4>
+          <p>Why paste-tools matter for educators and professionals:</p>
+          <ul>
+            <li><strong>100% In-Memory:</strong> Computation executes solely inside your browser's V8 JavaScript engine. No data is sent over the wire.</li>
+            <li><strong>Student Privacy Protection:</strong> Pasting student names, gradebooks, or confidential configs into remote servers risks data leaks and violates GDPR/FERPA.</li>
+            <li><strong>Full Offline Capability:</strong> Once loaded, this page functions with zero internet connection. You can disconnect Wi-Fi and continue inspecting data safely.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- JSON TYPES CHEATSHEET -->
+      <div class="edu-card" style="margin-top: 1.5rem;">
+        <h4>📋 JSON Data Types at a Glance</h4>
+        <div class="jv-table-wrap" style="margin-top: 1rem; border: none;">
+          <table class="jv-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Syntax Example</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: #38bdf8;">String</strong></td>
+                <td><code>"Alice"</code>, <code>"2026-11-16"</code></td>
+                <td>Text enclosed strictly in double quotes (never single quotes in valid JSON).</td>
+              </tr>
+              <tr>
+                <td><strong style="color: #fbbf24;">Number</strong></td>
+                <td><code>42</code>, <code>3.1415</code>, <code>-10</code></td>
+                <td>Integers or floating point values. No leading zeroes, octals, or NaN allowed.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: #c084fc;">Boolean</strong></td>
+                <td><code>true</code>, <code>false</code></td>
+                <td>Lowercase boolean values representing binary flags.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: #94a3b8;">Null</strong></td>
+                <td><code>null</code></td>
+                <td>Represents an intentional empty or unassigned value.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: #e2e8f0;">Object</strong></td>
+                <td><code>{"id": 1, "name": "Alice"}</code></td>
+                <td>An unordered collection of key/value pairs enclosed in curly braces.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: #e2e8f0;">Array</strong></td>
+                <td><code>[1, 2, "three", true]</code></td>
+                <td>An ordered list of zero or more values enclosed in square brackets.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -154,6 +296,14 @@
         <details class="faq-item">
           <summary class="faq-question">Can I use this tool offline?</summary>
           <p class="faq-answer">Yes! Once loaded, JSON Viewer executes without any network dependency. You can safely disconnect your internet connection and keep using it.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">Is it safe for teachers to inspect student data and classroom grades?</summary>
+          <p class="faq-answer">Yes, absolutely. Because the entire JSON parser and tree renderer runs strictly inside your local browser memory, no student names, grades, or school records leave your machine. It complies fully with GDPR and student data privacy principles.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-question">How does JSON Viewer differ from JSONFix?</summary>
+          <p class="faq-answer">JSONFix repairs malformed or broken JSON syntax (such as trailing commas, single quotes, or missing quotes around keys). JSON Viewer takes valid JSON and lets you visually explore its structure, search keys and values, collapse nodes, copy JSONPaths, and convert nested arrays to tables.</p>
         </details>
       </div>
     </section>
