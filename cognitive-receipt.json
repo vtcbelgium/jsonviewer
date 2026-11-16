@@ -1,0 +1,17 @@
+{
+  "attempts": 1,
+  "chamber": "deepcoder-fleet",
+  "model": "qwen2.5-coder:7b",
+  "hostId": "pc",
+  "pipeline": [
+    "parseJson",
+    "stringifyCanonical"
+  ],
+  "guidedEvaluations": 86,
+  "unrankedEvaluations": 316,
+  "speedupFactor": 3.67,
+  "holdoutPassed": true,
+  "latency_ms": 4619.9,
+  "tests_passed": true,
+  "typecheck_passed": true
+}
