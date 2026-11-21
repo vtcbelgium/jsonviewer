@@ -1,6 +1,6 @@
 Name: JSON Viewer
 URL: https://jsonviewer.othrys.be/
-Description: A client-side JSON viewer and formatter that renders JSON data in a collapsible tree structure with syntax highlighting, all executed locally in the browser with no server-side processing.
+Description: Explore, fold, search, and inspect nested JSON trees, JSONPaths, and payload statistics privately in your browser with zero server uploads.
 LLMs-Txt: https://jsonviewer.othrys.be/llms.txt
 Sitemap: https://jsonviewer.othrys.be/sitemap.xml
 Protocol: public-read-only
